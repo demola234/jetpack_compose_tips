@@ -1,28 +1,20 @@
 package com.example.movies
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.movies.ui.components.InputField
 import com.example.movies.ui.widget.RoundIconButton
-import kotlin.math.ceil
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +28,6 @@ fun JetTipApp() {
     val tipPercentState = remember { mutableFloatStateOf(15f) }
     val splitCountState = remember { mutableIntStateOf(1) }
     val validState = remember(amountState.value) { amountState.value.trim().isNotEmpty() }
-    val keyboardController = LocalSoftwareKeyboardController.current
 
     // Calculate tip and total per person
     val tipAmount = remember(amountState.value, tipPercentState.floatValue) {
@@ -73,10 +64,17 @@ fun JetTipApp() {
                     containerColor = primaryColor
                 ),
                 actions = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        amountState.value = ""
+                        tipPercentState.floatValue = 0.00f
+                        splitCountState.intValue = 0
+                        validState.not()
+
+
+                    }) {
                         Icon(
-                            Icons.Filled.Favorite,
-                            contentDescription = "Favorite",
+                            Icons.Filled.LockReset,
+                            contentDescription = "Reset",
                             tint = Color.White
                         )
                     }
@@ -90,6 +88,7 @@ fun JetTipApp() {
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            Spacer(modifier = Modifier.padding(horizontal = 10.dp))
             TopHeader(amount = totalPerPerson)
 
             MainContent(
@@ -98,7 +97,7 @@ fun JetTipApp() {
                 splitCountState = splitCountState,
                 tipAmount = tipAmount,
                 validState = validState,
-                keyboardController = keyboardController
+
             )
         }
     }
@@ -153,7 +152,7 @@ fun MainContent(
     splitCountState: MutableState<Int>,
     tipAmount: Double,
     validState: Boolean = false,
-    keyboardController: SoftwareKeyboardController? = null
+
 ) {
     Card(
         modifier = Modifier
@@ -193,7 +192,6 @@ fun BillForm(
     splitCountState: MutableState<Int>,
     tipAmount: Double,
     validState: Boolean,
-    modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = {},
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
