@@ -1,7 +1,8 @@
 package com.example.movies.ui.components
 
 import androidx.compose.foundation.text.*
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AttachMoney
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -23,7 +24,7 @@ fun InputField(
             onValueChange = { valueState.value = it },
             label = { Text(text = labelId) },
             singleLine = isSingleLine,
-            leadingIcon = { Icon(androidx.compose.material.icons.Icons.Rounded.Refresh, contentDescription = "Money Icon") },
+            leadingIcon = { Icon(androidx.compose.material.icons.Icons.Rounded.AttachMoney, contentDescription = "Money Icon") },
             enabled = enabled,
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
             keyboardActions = onAction,
