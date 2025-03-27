@@ -1,5 +1,6 @@
 package com.example.movies
 
+import ShimmerEffect
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,10 +15,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.movies.data.MovieData
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun MovieDetailScreen(movie: MovieData, navController: NavController) {
     val primaryColor = Color(0xFF1E3264)
@@ -47,14 +49,30 @@ fun MovieDetailScreen(movie: MovieData, navController: NavController) {
                 .padding(paddingValues)
                 .background(Color(0xFFF5F5F5))
         ) {
-            Image(
-                painter = painterResource(id = movie.imageResId),
-                contentDescription = movie.title,
-                contentScale = ContentScale.Crop,
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(240.dp)
-            )
+            ) {
+                ShimmerEffect(
+                    modifier = Modifier.fillMaxSize()
+                )
+
+
+                GlideImage(
+                    model = movie.imageResId,
+                    contentDescription = "Movie poster for ${movie.title}",
+                    contentScale = ContentScale.Crop,
+
+
+                    ) {
+                    it
+                        .centerCrop()
+                        .error(R.drawable.net)
+
+
+                }
+            }
 
             Column(
                 modifier = Modifier
@@ -144,4 +162,5 @@ fun MovieDetailScreen(movie: MovieData, navController: NavController) {
             }
         }
     }
+
 }

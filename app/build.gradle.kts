@@ -62,4 +62,9 @@ dependencies {
     implementation(libs.accompanist.swiperefresh)
     // ICONS
     implementation(libs.androidx.compose.material.icons.extended)
+
+//    Image
+    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+
 }

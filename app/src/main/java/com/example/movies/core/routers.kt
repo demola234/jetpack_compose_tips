@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.movies.MovieDetailScreen
 import com.example.movies.MovieUserScreen
-import com.example.movies.data.sampleMovies
+import com.example.movies.sampleMovies
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
