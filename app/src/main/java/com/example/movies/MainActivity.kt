@@ -3,6 +3,7 @@
 
 package com.example.movies
 
+import android.graphics.Movie
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -24,6 +25,9 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.movies.core.MovieNavigation
 import com.example.movies.ui.theme.MoviesTheme
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -35,9 +39,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = NavController(this)
+
             MoviesTheme {
-                JetTipApp()
+//                JetTipApp()
+                MovieNavigation()
             }
+
         }
 
     }

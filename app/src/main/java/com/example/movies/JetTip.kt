@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.movies.ui.components.InputField
 import com.example.movies.ui.widget.RoundIconButton
+import kotlin.text.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -90,7 +91,6 @@ fun JetTipApp() {
         ) {
             Spacer(modifier = Modifier.padding(horizontal = 10.dp))
             TopHeader(amount = totalPerPerson)
-
             MainContent(
                 amountState = amountState,
                 tipPercentState = tipPercentState,
