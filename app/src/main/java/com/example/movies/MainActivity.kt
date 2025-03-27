@@ -42,7 +42,6 @@ class MainActivity : ComponentActivity() {
             val navController = NavController(this)
 
             MoviesTheme {
-//                JetTipApp()
                 MovieNavigation()
             }
 
